@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import timber.log.Timber;
 
@@ -73,12 +74,16 @@ public class MainActivity extends AppCompatActivity implements AuthenticationLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Timber.d("NETWORK sdk started");
         ButterKnife.bind(this);
         initSDK();
+
     }
 
     private void initSDK() {
+        Timber.d("NETWORK sdk initialising");
         mCoreManager = new CoreManager(this, AppConstants.CONST_SDK_KEY, this, this, 1000, "https://api.stage.venuenow.tech/", "https://api.s4l.tech/bmsapi/");
+        Timber.d("NETWORK sdk version:" + mCoreManager.getVersion());
     }
 
     private void initListeners() {
@@ -97,18 +102,20 @@ public class MainActivity extends AppCompatActivity implements AuthenticationLis
                                 throwable -> Timber.d("Error attempting authenication %s", throwable.getMessage()))
         );
 
-        // Unlock free Wi-Fi
         mDisposable.add(
                 RxView.clicks(mUnlockWifi)
                         .debounce(500, TimeUnit.MILLISECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(AndroidSchedulers.mainThread())
                         .subscribe(result -> {
                                     Timber.d("WIFI unlocking");
                                     mResponse.setText("Unlocking Wi-Fi");
                                     mUnlockWifi.setEnabled(false);
-                                    mCoreManager.startWiFiOnboarding("Join Free Wi-Fi Warriors", "Subway Wi-Fi App", "5Gq:tmmV>P:,yEHj", NetworkManager.ONBOARDING_TYPE.WPA);
+                                    mCoreManager.startWiFiOnboarding("Free Subway Wifi", "Subway Wi-Fi App", "5Gq:tmmV>P:,yEHj", NetworkManager.ONBOARDING_TYPE.WPA);
                                 },
-                                throwable -> Timber.d("Error attempting beacon detection %s", throwable.getMessage()))
+                                throwable -> Timber.d("Error attempting to unlock Wi-Fi %s", throwable.getMessage()))
         );
+
 
         // Start search for beacons
         mDisposable.add(

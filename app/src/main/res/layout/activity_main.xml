@@ -7,6 +7,16 @@
     android:layout_margin="1dp"
     tools:context=".MainActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/flash_deals_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        >
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <Button
         android:id="@+id/btn_post_app_event"
@@ -19,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="@+id/btn_authenticate"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_valid_location" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_nearest_stores" />
 
     <TextView
         android:id="@+id/title2"
@@ -27,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="SDK SET UP"
+        android:text="@string/sdk_set_up_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,10 +47,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="17dp"
-        android:layout_marginEnd="8dp"
-        android:text="In Valid Location?"
-        app:layout_constraintEnd_toEndOf="@+id/btn_authenticate"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/valid_location"
+        app:layout_constraintEnd_toEndOf="@+id/event_name"
+        app:layout_constraintStart_toStartOf="@+id/event_name"
         app:layout_constraintTop_toBottomOf="@+id/btn_nearest_stores" />
 
     <Button
@@ -48,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
-        android:text="Unlock Wi-Fi"
+        android:text="@string/unlock_wifi"
         app:layout_constraintBottom_toBottomOf="@+id/btn_detect_beacons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btn_authenticate" />
@@ -75,12 +84,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="Nearest Stores"
-        app:layout_constraintEnd_toEndOf="@+id/btn_authenticate"
+        android:text="@string/nearest_stores"
+        app:layout_constraintEnd_toStartOf="@+id/btn_valid_location"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        tools:layout_editor_absoluteY="194dp" />
 
     <TextView
         android:id="@+id/title"
@@ -88,7 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
-        android:text="API CALLS - Please Authenticate SDK First"
+        android:text="@string/api_instructions"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_detect_beacons" />
 
@@ -98,7 +106,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Authenticate QSR SDK"
+        android:text="@string/authenticate_sdk"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title2" />
 
@@ -107,7 +115,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Detect Beacons"
+        android:text="@string/detect_beacons"
         app:layout_constraintEnd_toEndOf="@+id/btn_authenticate"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/btn_authenticate"
@@ -120,7 +128,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="Event name"
+        android:hint="@string/event_name"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="@+id/btn_post_app_event"
         app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +142,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="RESPONSES"
+        android:text="@string/responses"
         app:layout_constraintBottom_toTopOf="@+id/txt_response"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_post_app_event" />

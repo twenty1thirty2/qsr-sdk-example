@@ -16,6 +16,7 @@ import com.closecomms.qsrcorelibraryclient.CoreManager;
 import com.closecomms.qsrcorelibraryclient.authentication.AuthenticationListener;
 import com.closecomms.qsrcorelibraryclient.data.models.Branch;
 import com.closecomms.qsrcorelibraryclient.data.models.Message;
+import com.closecomms.qsrcorelibraryclient.data.models.NotificationOffer;
 import com.closecomms.qsrcorelibraryclient.onboarder.NetworkManager;
 import com.jakewharton.rxbinding3.view.RxView;
 
@@ -66,6 +67,22 @@ public class MainActivity extends AppCompatActivity implements AuthenticationLis
     @BindView(R.id.txt_response)
     TextView mResponse;
 
+    @BindView(R.id.user_id)
+    EditText mUserID;
+
+    @BindView(R.id.btn_authenticate_with_id)
+    Button mAuthenticateWithUserId;
+
+    @BindView(R.id.lat)
+    EditText mLat;
+
+    @BindView(R.id.lng)
+    EditText mLng;
+
+    @BindView(R.id.btn_get_deal)
+    Button mGetFlashDeals;
+
+
     //================================================================================
     // LIFECYCLE METHODS
     //================================================================================
@@ -114,7 +131,6 @@ public class MainActivity extends AppCompatActivity implements AuthenticationLis
                                 },
                                 throwable -> Timber.d("Error attempting to unlock Wi-Fi %s", throwable.getMessage()))
         );
-
 
         // Start search for beacons
         mDisposable.add(
@@ -182,6 +198,62 @@ public class MainActivity extends AppCompatActivity implements AuthenticationLis
                                 throwable -> Timber.d("Error getting nearest stores %s", throwable.getMessage()))
         );
 
+
+        // Authenticate with user id
+        mDisposable.add(
+                RxView.clicks(mAuthenticateWithUserId)
+                        .debounce(500, TimeUnit.MILLISECONDS)
+                        .subscribe(result -> {
+                                    mResponse.setText("Authenticating with user id");
+                                    mCoreManager.authenticateSDKWithClientLogin(mUserID.getText().toString());
+                                },
+                                throwable -> Timber.d("Error attempting authenication with user id %s", throwable.getMessage()))
+        );
+
+        // Get nearest stores
+        mDisposable.add(
+                RxView.clicks(mNearestStores)
+                        .debounce(500, TimeUnit.MILLISECONDS)
+                        .flatMap(view -> {
+                            mResponse.setText("Getting stores");
+                            return mCoreManager.APIService().observableNearestStoresToLocation(51.0, -113, 50);
+                        })
+                        .subscribe(stores -> {
+                                    if (stores != null && stores.size() > 0) {
+                                        StringBuilder storeList = new StringBuilder();
+                                        for (Branch branch : stores) {
+                                            storeList.append(branch.getZip());
+                                            storeList.append(System.getProperty("line.separator"));
+                                        }
+                                        ResponseActivity.start(this, "Stores:" + storeList.toString());
+                                    } else {
+                                         mResponse.setText("No stores found");
+                                    }
+                                },
+                                throwable -> Timber.d("Error getting nearest stores %s", throwable.getMessage()))
+        );
+
+        mDisposable.add(
+                RxView.clicks(mGetFlashDeals)
+                        .debounce(500, TimeUnit.MILLISECONDS)
+                        .flatMap(view -> {
+                            mResponse.setText("Getting stores");
+                            return mCoreManager.APIService().observableCampaignOffersSentToUser(Double.parseDouble(mLat.getText().toString()), Double.parseDouble(mLng.getText().toString()));
+                        })
+                        .subscribe(offers -> {
+                                    if (offers != null && offers.size() > 0) {
+                                        StringBuilder offerList = new StringBuilder();
+                                        for (NotificationOffer offer : offers) {
+                                            offerList.append(offer.getTitle());
+                                            offerList.append(System.getProperty("line.separator"));
+                                        }
+                                        ResponseActivity.start(this, getString(R.string.status_offers) + offerList.toString());
+                                    } else {
+                                        mResponse.setText("No offers found for user");
+                                    }
+                                },
+                                throwable -> Timber.d("Error getting offers %s", throwable.getMessage()))
+        );
 
     }
 

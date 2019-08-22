@@ -25,8 +25,8 @@ allprojects {
         maven {
             url "http://165.227.223.60:8081/artifactory/libs-release-local"
             credentials {
-                username = "qsr"
-                password = "CL053comms1"
+                username = "YOUR_USERNAME"
+                password = "YOUR_PASSWORD"
             }
         }
     }

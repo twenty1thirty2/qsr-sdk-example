@@ -19,4 +19,5 @@
     <string name="onboarding_title">ONBOARDING</string>
     <string name="status_title">STATUS</string>
     <string name="response_title">RESPONSE</string>
+    <string name="status_offers">Getting offers for customer</string>
 </resources>

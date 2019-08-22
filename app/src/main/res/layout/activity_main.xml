@@ -46,9 +46,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/status_title" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/wifi_container"
@@ -115,7 +113,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/user_id_title"
+                android:id="@+id/user_id"
                 style="@style/qsr_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -132,29 +130,29 @@
                 android:layout_height="wrap_content"
                 android:text="@string/flash_deal_authenticate"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/user_id_title" />
+                app:layout_constraintTop_toBottomOf="@+id/user_id" />
 
             <EditText
-                android:id="@+id/lat_title"
+                android:id="@+id/lat"
                 style="@style/qsr_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/flash_deal_lat"
                 android:inputType="text"
-                app:layout_constraintLeft_toLeftOf="@id/user_id_title"
+                app:layout_constraintLeft_toLeftOf="@id/user_id"
                 app:layout_constraintTop_toBottomOf="@id/btn_authenticate_with_id" />
 
             <EditText
-                android:id="@+id/long_title"
+                android:id="@+id/lng"
                 style="@style/qsr_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/flash_deal_long"
                 android:inputType="text"
-                app:layout_constraintLeft_toLeftOf="@id/lat_title"
-                app:layout_constraintTop_toBottomOf="@id/lat_title" />
+                app:layout_constraintLeft_toLeftOf="@id/lat"
+                app:layout_constraintTop_toBottomOf="@id/lat" />
 
             <Button
                 android:id="@+id/btn_get_deal"
@@ -163,7 +161,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/flash_deal_get"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/long_title" />
+                app:layout_constraintTop_toBottomOf="@+id/lng" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

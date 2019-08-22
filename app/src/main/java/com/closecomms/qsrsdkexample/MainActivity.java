@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements AuthenticationLis
         Timber.d("NETWORK sdk started");
         ButterKnife.bind(this);
         initSDK();
-
     }
 
     private void initSDK() {
@@ -141,11 +140,12 @@ public class MainActivity extends AppCompatActivity implements AuthenticationLis
                                         StringBuilder storeList = new StringBuilder();
                                         for (Branch branch : stores) {
                                             storeList.append(branch.getZip());
-                                            storeList.append(":");
+                                            storeList.append(System.getProperty("line.separator"));
                                         }
-                                        mResponse.setText("Stores:" + storeList.toString());
+                                        ResponseActivity.start(this, "Stores:" + storeList.toString());
+                                        //mResponse.setText("Stores:" + storeList.toString());
                                     } else {
-                                        mResponse.setText("No stores found");
+                                        // mResponse.setText("No stores found");
                                     }
                                 },
                                 throwable -> Timber.d("Error getting nearest stores %s", throwable.getMessage()))
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements AuthenticationLis
                         })
                         .subscribe(validLocation -> {
                                     if (validLocation != null) {
-                                        mResponse.setText("Is customer in a valid location:" + validLocation.isInRange());
+                                        ResponseActivity.start(this, getString(R.string.is_in_valid_location) + validLocation.isInRange());
                                     }
                                 },
                                 throwable -> Timber.d("Error getting nearest stores %s", throwable.getMessage()))

@@ -6,7 +6,7 @@ Put the SDK Key into the AppConstants file and the Maven credentials into the pr
 ## Download
 ```java
 dependencies {
-   implementation 'com.closecomms.qsrsdk:qsrcorelibraryclient:1.1.6'
+   implementation 'com.closecomms.qsrsdk:qsrcorelibraryclient:1.1.10'
 }
 ```
 

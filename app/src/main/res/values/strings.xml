@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">QSR SDK Example</string>
     <string name="sdk_set_up_title">SDK Set Up</string>
-    <string name="valid_location">In Valid Location?</string>
+    <string name="is_in_valid_location">In Valid Location?</string>
     <string name="unlock_wifi">Unlock Wi-Fi</string>
     <string name="nearest_stores">Nearest Stores</string>
     <string name="api_instructions">API CALLS - Please Authenticate SDK First</string>
@@ -9,8 +9,14 @@
     <string name="detect_beacons">Detect Beacons</string>
     <string name="event_name">Event name</string>
     <string name="responses">RESPONSES</string>
-    <string name="flash_deal_title">Flash Deals</string>
+    <string name="flash_deal_title">FLASH DEALS</string>
     <string name="flash_deal_user_id">User Id</string>
     <string name="flash_deal_lat">Lat</string>
     <string name="flash_deal_long">Long</string>
+    <string name="flash_deal_get">Get Deals</string>
+    <string name="flash_deal_authenticate">Authenticate with User Id</string>
+    <string name="api_send_event">SEND EVENT</string>
+    <string name="onboarding_title">ONBOARDING</string>
+    <string name="status_title">STATUS</string>
+    <string name="response_title">RESPONSE</string>
 </resources>
